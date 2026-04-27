@@ -1,0 +1,205 @@
+/* ============================================================
+   Diabetes Health Indicators — BRFSS 2015
+   Estilos principales
+   ============================================================ */
+
+/* ── Reset & base ─────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: #f4f6f9;
+  color: #2d2d2d;
+  font-size: 14px;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+header {
+  background: #1a1a2e;
+  color: #fff;
+  padding: 18px 36px 14px;
+  border-bottom: 4px solid #E41A1C;
+}
+header h1 {
+  font-size: 19px;
+  font-weight: 700;
+}
+header p {
+  font-size: 12px;
+  color: #a0aec0;
+  margin-top: 4px;
+}
+
+/* ── Navegación ───────────────────────────────────────────── */
+nav {
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  padding: 0 36px;
+  gap: 4px;
+}
+nav button {
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #718096;
+  cursor: pointer;
+  white-space: nowrap;
+}
+nav button:hover { color: #2d2d2d; }
+nav button.active {
+  color: #E41A1C;
+  border-bottom-color: #E41A1C;
+}
+
+/* ── Layout principal ─────────────────────────────────────── */
+.container {
+  display: flex;
+  gap: 20px;
+  padding: 20px 36px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ── Sidebar ──────────────────────────────────────────────── */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+}
+.sidebar-box {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+}
+.sidebar-box h4 {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #718096;
+  margin-bottom: 14px;
+}
+.filter-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 8px;
+  display: block;
+}
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  margin-bottom: 7px;
+  cursor: pointer;
+}
+.checkbox-group input[type=checkbox] {
+  width: 15px;
+  height: 15px;
+  accent-color: #E41A1C;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+hr.sep {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: 14px 0;
+}
+.sidebar-note {
+  font-size: 11px;
+  color: #a0aec0;
+  line-height: 1.5;
+}
+
+/* ── Panel principal ──────────────────────────────────────── */
+.main { flex: 1; min-width: 0; }
+
+.chart-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px 24px 16px;
+  display: none;
+}
+.chart-card.active { display: block; }
+
+/* ── Insight box ──────────────────────────────────────────── */
+.insight-box {
+  background: #fffbeb;
+  border-left: 4px solid #f6ad55;
+  padding: 9px 14px;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 16px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #3d3d3d;
+}
+.insight-box strong { color: #c05621; }
+
+/* ── Títulos de gráfico ───────────────────────────────────── */
+.chart-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 3px;
+}
+.chart-subtitle {
+  font-size: 12px;
+  color: #718096;
+  margin-bottom: 16px;
+}
+.chart-source {
+  font-size: 11px;
+  color: #cbd5e0;
+  text-align: right;
+  margin-top: 8px;
+}
+
+/* ── SVG tipografía ───────────────────────────────────────── */
+svg text {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* ── Tooltip ──────────────────────────────────────────────── */
+.tooltip {
+  position: fixed;
+  background: rgba(26, 26, 46, 0.92);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .15s;
+  line-height: 1.6;
+  z-index: 999;
+}
+
+/* ── Leyenda ──────────────────────────────────────────────── */
+.legend {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}

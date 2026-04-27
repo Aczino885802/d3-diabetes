@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diabetes Health Indicators — BRFSS 2015</title>
+
+  <!-- D3.js desde CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <header>
+    <h1>Indicadores de Salud y Riesgo de Diabetes — EE.UU. 2015</h1>
+    <p>Behavioral Risk Factor Surveillance System (BRFSS) · CDC · n = 253,680 · 22 variables</p>
+  </header>
+
+  <!-- Navegación -->
+  <nav>
+    <button class="active" onclick="showTab(0)">Comparación por grupo</button>
+    <button onclick="showTab(1)">Distribución de BMI</button>
+    <button onclick="showTab(2)">Factores de riesgo</button>
+    <button onclick="showTab(3)">Prevalencia por edad</button>
+    <button onclick="showTab(4)">Correlaciones</button>
+  </nav>
+
+  <!-- Contenido -->
+  <div class="container">
+
+    <!-- Sidebar filtros -->
+    <aside class="sidebar">
+      <div class="sidebar-box">
+        <h4>Filtros</h4>
+        <span class="filter-label">Condición diabética</span>
+        <div class="checkbox-group" id="checkboxes">
+          <label>
+            <input type="checkbox" value="Sin Diabetes" checked>
+            <span class="dot" style="background:#4DAF4A"></span>
+            Sin Diabetes
+          </label>
+          <label>
+            <input type="checkbox" value="Prediabetes" checked>
+            <span class="dot" style="background:#FF7F00"></span>
+            Prediabetes
+          </label>
+          <label>
+            <input type="checkbox" value="Diabetes" checked>
+            <span class="dot" style="background:#E41A1C"></span>
+            Diabetes
+          </label>
+        </div>
+        <hr class="sep">
+        <p class="sidebar-note">
+          Los filtros aplican a todas las visualizaciones
+          excepto el mapa de correlaciones.
+        </p>
+      </div>
+    </aside>
+
+    <!-- Visualizaciones -->
+    <main class="main">
+
+      <!-- Tab 0: Barras -->
+      <div class="chart-card active" id="tab-0">
+        <div class="insight-box">
+          <strong>Hallazgo:</strong> El 84.2% de los encuestados no reporta diabetes.
+          La prediabetes representa solo el 1.8%, lo que sugiere un alto nivel de
+          subdiagnóstico en la población general estadounidense.
+        </div>
+        <div class="chart-title">Distribución de encuestados según condición diabética</div>
+        <div class="chart-subtitle">Conteo absoluto y porcentaje sobre el total filtrado</div>
+        <svg id="chart-barras"></svg>
+        <p class="chart-source">Fuente: CDC BRFSS 2015 — Kaggle</p>
+      </div>
+
+      <!-- Tab 1: Boxplot -->
+      <div class="chart-card" id="tab-1">
+        <div class="insight-box">
+          <strong>Hallazgo:</strong> La mediana del IMC en personas con diabetes (~31)
+          es notablemente mayor que en personas sin diabetes (~27).
+          El sobrepeso y la obesidad son factores de riesgo centrales.
+        </div>
+        <div class="chart-title">Distribución del IMC (BMI) según condición diabética</div>
+        <div class="chart-subtitle">Cajas: Q1–Q3 · Línea: mediana · Rombo: media · Bigotes: 1.5×IQR</div>
+        <svg id="chart-boxplot"></svg>
+        <p class="chart-source">Fuente: CDC BRFSS 2015 — Kaggle</p>
+      </div>
+
+      <!-- Tab 2: Barras agrupadas -->
+      <div class="chart-card" id="tab-2">
+        <div class="insight-box">
+          <strong>Hallazgo:</strong> La hipertensión (75.3%) y el colesterol alto (67%)
+          son los factores de riesgo más prevalentes en personas con diabetes.
+          La actividad física es notablemente menor en ese grupo.
+        </div>
+        <div class="chart-title">Prevalencia de factores de riesgo por condición diabética</div>
+        <div class="chart-subtitle">Porcentaje de personas con cada factor de riesgo presente</div>
+        <div class="legend" id="legend-factores"></div>
+        <svg id="chart-factores"></svg>
+        <p class="chart-source">Fuente: CDC BRFSS 2015 — Kaggle</p>
+      </div>
+
+      <!-- Tab 3: Barras apiladas edad -->
+      <div class="chart-card" id="tab-3">
+        <div class="insight-box">
+          <strong>Hallazgo:</strong> La prevalencia de diabetes aumenta sostenidamente
+          con la edad. En el grupo 60–64 años supera el 25% de los encuestados,
+          y sigue creciendo en los grupos mayores.
+        </div>
+        <div class="chart-title">Composición de la condición diabética según grupo de edad</div>
+        <div class="chart-subtitle">Barras apiladas al 100% — cada barra representa un grupo etario</div>
+        <div class="legend" id="legend-edad"></div>
+        <svg id="chart-edad"></svg>
+        <p class="chart-source">Fuente: CDC BRFSS 2015 — Kaggle</p>
+      </div>
+
+      <!-- Tab 4: Heatmap -->
+      <div class="chart-card" id="tab-4">
+        <div class="insight-box">
+          <strong>Hallazgo:</strong> Diabetes correlaciona más fuertemente con
+          salud general percibida (0.30), hipertensión (0.27) y BMI (0.22).
+          La actividad física muestra correlación negativa consistente (−0.12).
+        </div>
+        <div class="chart-title">Matriz de correlación de Pearson entre indicadores de salud</div>
+        <div class="chart-subtitle">Paleta divergente: rojo = correlación positiva · azul = correlación negativa</div>
+        <svg id="chart-heatmap"></svg>
+        <p class="chart-source">Fuente: CDC BRFSS 2015 — Kaggle</p>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Tooltip global -->
+  <div class="tooltip" id="tooltip"></div>
+
+  <!-- Lógica principal -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>

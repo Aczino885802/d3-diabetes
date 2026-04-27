@@ -96,7 +96,7 @@ Desplegado en **GitHub Pages** desde la rama `main`.
 ## Autores
 
 - Carlos Muñoz
-- [Nombre de tu compañero/a]
+- [Juan Camilo]
 
 **Curso:** Herramientas y Visualización de Datos
 **Institución:** Fundación Universitaria Los Libertadores

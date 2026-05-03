@@ -137,19 +137,6 @@ hr.sep {
 }
 .chart-card.active { display: block; }
 
-/* ── Insight box ──────────────────────────────────────────── */
-.insight-box {
-  background: #fffbeb;
-  border-left: 4px solid #f6ad55;
-  padding: 9px 14px;
-  border-radius: 0 6px 6px 0;
-  margin-bottom: 16px;
-  font-size: 13px;
-  line-height: 1.5;
-  color: #3d3d3d;
-}
-.insight-box strong { color: #c05621; }
-
 /* ── Títulos de gráfico ───────────────────────────────────── */
 .chart-title {
   font-size: 14px;
@@ -167,6 +154,28 @@ hr.sep {
   color: #cbd5e0;
   text-align: right;
   margin-top: 8px;
+}
+
+/* ── Hallazgos ────────────────────────────────────────────── */
+.hallazgos {
+  background: #fffbeb;
+  border-left: 4px solid #f6ad55;
+  padding: 14px 18px;
+  border-radius: 0 6px 6px 0;
+  margin-top: 16px;
+  font-size: 13.5px;
+  color: #2d3748;
+  line-height: 1.65;
+}
+.hallazgos b { color: #c05621; }
+.hallazgos .titulo-h {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #c05621;
+  margin-bottom: 8px;
+  display: block;
 }
 
 /* ── SVG tipografía ───────────────────────────────────────── */
@@ -187,19 +196,4 @@ svg text {
   transition: opacity .15s;
   line-height: 1.6;
   z-index: 999;
-}
-
-/* ── Leyenda ──────────────────────────────────────────────── */
-.legend {
-  display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
-  margin-bottom: 12px;
-}
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 600;
 }

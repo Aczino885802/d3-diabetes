@@ -21,11 +21,11 @@
 
   <!-- Navegación -->
   <nav>
-    <button class="active" onclick="showTab(0)">Comparación por grupo</button>
+    <button class="active" onclick="showTab(0)">Acceso a salud por ingreso</button>
     <button onclick="showTab(1)">Distribución de BMI</button>
     <button onclick="showTab(2)">Factores de riesgo</button>
     <button onclick="showTab(3)">Prevalencia por edad</button>
-    <button onclick="showTab(4)">Correlaciones</button>
+    <button onclick="showTab(4)">Mapa de correlaciones</button>
   </nav>
 
   <!-- Contenido -->
@@ -55,8 +55,7 @@
         </div>
         <hr class="sep">
         <p class="sidebar-note">
-          Los filtros aplican a todas las visualizaciones
-          excepto el mapa de correlaciones.
+          Los filtros aplican a todas las visualizaciones excepto el mapa de correlaciones y el de acceso por ingreso.
         </p>
       </div>
     </aside>
@@ -64,71 +63,49 @@
     <!-- Visualizaciones -->
     <main class="main">
 
-      <!-- Tab 0: Barras -->
+      <!-- Tab 0: Acceso a salud por ingreso -->
       <div class="chart-card active" id="tab-0">
-        <div class="insight-box">
-          <strong>Hallazgo:</strong> El 84.2% de los encuestados no reporta diabetes.
-          La prediabetes representa solo el 1.8%, lo que sugiere un alto nivel de
-          subdiagnóstico en la población general estadounidense.
-        </div>
-        <div class="chart-title">Distribución de encuestados según condición diabética</div>
-        <div class="chart-subtitle">Conteo absoluto y porcentaje sobre el total filtrado</div>
-        <svg id="chart-barras"></svg>
+        <div class="chart-title">Acceso a atención médica según nivel de ingreso</div>
+        <div class="chart-subtitle">Cobertura de salud y costo como barrera para ir al médico</div>
+        <svg id="chart-acceso"></svg>
         <p class="chart-source">Fuente: CDC BRFSS 2015 — Kaggle</p>
+        <div class="hallazgos" id="hallazgos-acceso"></div>
       </div>
 
-      <!-- Tab 1: Boxplot -->
+      <!-- Tab 1: Distribución de BMI -->
       <div class="chart-card" id="tab-1">
-        <div class="insight-box">
-          <strong>Hallazgo:</strong> La mediana del IMC en personas con diabetes (~31)
-          es notablemente mayor que en personas sin diabetes (~27).
-          El sobrepeso y la obesidad son factores de riesgo centrales.
-        </div>
-        <div class="chart-title">Distribución del IMC (BMI) según condición diabética</div>
-        <div class="chart-subtitle">Cajas: Q1–Q3 · Línea: mediana · Rombo: media · Bigotes: 1.5×IQR</div>
-        <svg id="chart-boxplot"></svg>
-        <p class="chart-source">Fuente: CDC BRFSS 2015 — Kaggle</p>
+        <div class="chart-title">Distribución del peso corporal según condición diabética</div>
+        <div class="chart-subtitle">Histograma con líneas que marcan sobrepeso (25) y obesidad (30) según la OMS</div>
+        <svg id="chart-bmi"></svg>
+        <p class="chart-source">Fuente: CDC BRFSS 2015 — Kaggle · Cortes IMC: OMS</p>
+        <div class="hallazgos" id="hallazgos-bmi"></div>
       </div>
 
-      <!-- Tab 2: Barras agrupadas -->
+      <!-- Tab 2: Radar factores de riesgo -->
       <div class="chart-card" id="tab-2">
-        <div class="insight-box">
-          <strong>Hallazgo:</strong> La hipertensión (75.3%) y el colesterol alto (67%)
-          son los factores de riesgo más prevalentes en personas con diabetes.
-          La actividad física es notablemente menor en ese grupo.
-        </div>
-        <div class="chart-title">Prevalencia de factores de riesgo por condición diabética</div>
-        <div class="chart-subtitle">Porcentaje de personas con cada factor de riesgo presente</div>
-        <div class="legend" id="legend-factores"></div>
-        <svg id="chart-factores"></svg>
+        <div class="chart-title">Perfil de factores de riesgo por condición diabética</div>
+        <div class="chart-subtitle">Cuánto afecta cada factor a las personas según su condición</div>
+        <svg id="chart-radar"></svg>
         <p class="chart-source">Fuente: CDC BRFSS 2015 — Kaggle</p>
+        <div class="hallazgos" id="hallazgos-radar"></div>
       </div>
 
-      <!-- Tab 3: Barras apiladas edad -->
+      <!-- Tab 3: Heatmap edad -->
       <div class="chart-card" id="tab-3">
-        <div class="insight-box">
-          <strong>Hallazgo:</strong> La prevalencia de diabetes aumenta sostenidamente
-          con la edad. En el grupo 60–64 años supera el 25% de los encuestados,
-          y sigue creciendo en los grupos mayores.
-        </div>
-        <div class="chart-title">Composición de la condición diabética según grupo de edad</div>
-        <div class="chart-subtitle">Barras apiladas al 100% — cada barra representa un grupo etario</div>
-        <div class="legend" id="legend-edad"></div>
+        <div class="chart-title">Prevalencia diabética según grupo de edad</div>
+        <div class="chart-subtitle">Mapa de calor — más rojo = mayor porcentaje de personas en esa edad</div>
         <svg id="chart-edad"></svg>
         <p class="chart-source">Fuente: CDC BRFSS 2015 — Kaggle</p>
+        <div class="hallazgos" id="hallazgos-edad"></div>
       </div>
 
-      <!-- Tab 4: Heatmap -->
+      <!-- Tab 4: Heatmap correlaciones -->
       <div class="chart-card" id="tab-4">
-        <div class="insight-box">
-          <strong>Hallazgo:</strong> Diabetes correlaciona más fuertemente con
-          salud general percibida (0.30), hipertensión (0.27) y BMI (0.22).
-          La actividad física muestra correlación negativa consistente (−0.12).
-        </div>
-        <div class="chart-title">Matriz de correlación de Pearson entre indicadores de salud</div>
-        <div class="chart-subtitle">Paleta divergente: rojo = correlación positiva · azul = correlación negativa</div>
-        <svg id="chart-heatmap"></svg>
+        <div class="chart-title">Cómo se relacionan los indicadores de salud entre sí</div>
+        <div class="chart-subtitle">Rojo: van de la mano · Azul: cuando uno sube, el otro baja</div>
+        <svg id="chart-corr"></svg>
         <p class="chart-source">Fuente: CDC BRFSS 2015 — Kaggle</p>
+        <div class="hallazgos" id="hallazgos-corr"></div>
       </div>
 
     </main>
